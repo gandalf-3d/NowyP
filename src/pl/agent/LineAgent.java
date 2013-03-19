@@ -29,6 +29,7 @@ public class LineAgent extends Agent {
 	private boolean IS_GETING_TASK=false;
 	private long agentErrorSleapTime= 600l;
 	private long agentProductionTime= 0;
+	private String coffeName=""; 
 	private String volumen="";
 	private long timeKgOfCoffe;
 	private long timeWait=4000;
@@ -39,6 +40,10 @@ public class LineAgent extends Agent {
 	private boolean SERVICE_ERROR=false;
 	private int volumentInt = 0; 
 	
+	static{
+		time= new DateTime();
+		    agentWithError= new HashSet<String>();
+		  } 
 
 	protected void setup() {
 		MY_NAME=getLocalName();
@@ -49,6 +54,8 @@ public class LineAgent extends Agent {
 			ServiceDescription serviceDescription = new ServiceDescription();
 			serviceDescription.setName(Const.SERVICE_LINE);
 			serviceDescription.setType(Const.SERVICE_LINE);
+			Property p = new Property(Const.ARE_YOU_FREE, 1);
+			serviceDescription.addProperties(p);
 
 			dfAgentDescription.addServices(serviceDescription);
 			DFService.register(this, dfAgentDescription);
@@ -91,6 +98,7 @@ public class LineAgent extends Agent {
 					if (FREE) {
 						Panel.rysuj(null, Decorator.decorateView("Oodbieram zapaytanie i odsylam ¿e jestem Wolna", Color.GREEN, myAgent.getLocalName()));
 						doWait(timeWait);
+						aclReply.setContent(Const.I_FREE); 
 						System.out.println(getLocalName() + " wysyla wiadomosc ze jest wolna");
 						this.myAgent.send(aclReply);
 						IS_GETING_TASK=true;
@@ -120,13 +128,21 @@ public class LineAgent extends Agent {
 						if(acl.getConversationId().equals(Const.TASK_LINE)){
 							String []taski;
 							taski= acl.getContent().split(Const.spilt);
+							coffeName=taski[0]; 
 							volumen=taski[1];
-							Panel.rysuj(null, Decorator.decorateView("Odebrane:  +"+volumen+ " kg ", Color.GREEN, myAgent.getLocalName()));
+							 Panel.rysuj(null, Decorator.decorateView("Odebrane:  +"+volumen+ " kg "+ coffeName, Color.GREEN, myAgent.getLocalName()));
 							doWait(timeWait);
-							System.out.println(getLocalName() + " odbiera task " + volumen + "+kg+ " + " " +agentProductionTime +" s" );
+							getTimeProduction(coffeName,volumen);
+							System.out.println(getLocalName() + " odbiera task " + volumen + "+kg+ " + coffeName + " " +agentProductionTime +" s" ); 
 							setFREE(false);
 						}else{
 							System.out.println(getLocalName() + " Task !=" +Const.TASK_LINE + acl.getContent());
+							
+							if(isFREE() && acl.getContent().equals(Const.ARE_YOU_FREE)){
+								ACLMessage aclReply = acl.createReply();
+								aclReply.setContent(Const.I_FREE);
+								myAgent.send(aclReply);
+								} 
 							
 						}
 					}else{
@@ -150,6 +166,7 @@ public class LineAgent extends Agent {
 		}
 
 		private void  getTimeProduction(String coffeName, String volumen) {
+			timeKgOfCoffe=Const.coffeMap.get(coffeName); 
 			agentProductionTime=(long)Long.valueOf(volumen)*timeKgOfCoffe;
 			volumentInt= Integer.valueOf(volumen);
 		}
@@ -164,7 +181,7 @@ public class Work extends CyclicBehaviour{
 		@Override
 		public void action() {
 			if(stop){
-				Panel.rysuj(null, Decorator.decorateView("Wyprodukowane ", Color.GRAY, myAgent.getLocalName()));
+				Panel.rysuj(null, Decorator.decorateView("Wyprodukowane "+ coffeName, Color.GRAY, myAgent.getLocalName()));
 				myAgent.doWait(900000);
 			}
 			
@@ -180,7 +197,7 @@ public class Work extends CyclicBehaviour{
 						ms++;
 						doWait(2);
 						//System.out.println(getLocalName() +  ms);
-						Panel.rysuj(null, Decorator.decorateView("Trwa produkcja ", Color.WHITE, myAgent.getLocalName()));
+						Panel.rysuj(null, Decorator.decorateView("Trwa produkcja "+ coffeName, Color.WHITE, myAgent.getLocalName()));
 						try{		
 							if(!agentWithError.isEmpty()){	
 								String name=null;
@@ -194,7 +211,7 @@ public class Work extends CyclicBehaviour{
 									doWait(900);
 									Panel.rysuj(null, Decorator.decorateView("Naprawa bedzie trwala +" +agentErrorSleapTime, Color.RED, myAgent.getLocalName()));
 									ACLMessage acl = new ACLMessage(ACLMessage.FAILURE);
-									acl.setContent(Const.spilt+String.valueOf(volumentInt));
+									acl.setContent(coffeName+Const.spilt+String.valueOf(volumentInt));
 									acl.addReceiver(new AID(Const.MANAGER_AGENT, AID.ISLOCALNAME));
 									send(acl);
 									counterError++;
@@ -263,6 +280,7 @@ public void clearAll(){
 	IS_GETING_TASK=false;
 	agentProductionTime= 0;
 	volumen="";
+	coffeName=""; 
 	timeKgOfCoffe=0l;
 	counterGlobal= 0;
 	agentWithError.remove(getLocalName());
