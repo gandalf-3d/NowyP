@@ -18,18 +18,28 @@ public class ReadFile {
 
 		text = text.append(bufferedReader.readLine());
 		
-		 while ( text != null){
+		 try {
+		
+			 do {
 			 System.out.println(text);
-		 }
-				  bufferedReader.close();
-				return text;
+			 text= text.append(bufferedReader.readLine());
+			 
+			 //po wszytkich zakach wyslietla nullnullnull...i znow znaki od nowej lini i znów null..
+
+			 } while (text != null);
+			 
+		 } finally { 
+			 bufferedReader.close();
+			 }
+		 
+		 return text;
 			  }
 		
 	
 	
 	public static void main(String[] args) throws IOException {
 		
-		//zapêtla siê pierwsza linia trzeba poprawiæ
+		//zapetla sie trzeba poprawiæ
 		
 		readFile("c:/plik.txt");
 
