@@ -56,7 +56,7 @@ public class ManagerAgent extends Agent {
 				
 				@Override
 				public void action() {
-					if(!I_SEND_MESSAGE_FOR_ALL && !getBufforTask().isEmpty()){
+					if(!I_SEND_MESSAGE_FOR_ALL){
 					try {
 						System.out.println(getLocalName() + " Agent Men start behavior sprawdz czy sa wolne linie");
 						DFAgentDescription template = new DFAgentDescription();
@@ -69,8 +69,6 @@ public class ManagerAgent extends Agent {
 								Panel.rysuj(null, Decorator.decorateView("Szukam Wolnej lini", Color.BLUE,Const.MANAGER_AGENT));
 								doWait(timeWait);
 								ACLMessage acl = new ACLMessage();
-								acl.setContent(Const.ARE_YOU_FREE);
-								acl.setConversationId(Const.ID_LINE_FREE);
 								acl.setReplyWith("acl " + System.currentTimeMillis());
 								System.out.println(getLocalName() + " Wysylanie wiadomosci +" +dfAgentDescription.length+" agentów");
 								for (int i=0; i<dfAgentDescription.length; i++){
@@ -100,20 +98,20 @@ public class ManagerAgent extends Agent {
 					@Override
 					public void action() {
 						
-							if (!getBufforTask().isEmpty() && counterTask>0) {
+							if (counterTask>0) {
 								try {
 									System.out.println(getLocalName() + " Agent przydziela zadanie lini");
 									ACLMessage acl = myAgent.receive();
 									if (acl != null) {
 				
-										if (acl.getContent().equals(Const.I_FREE)) {
+										if (acl.getContent() != null) {
 											System.out.println(getLocalName() + " Men Linia jest wolna");
 											ACLMessage aclReply = acl.createReply();
-											String task = getBufforTask().pop().toString();
-											aclReply.setContent(task);
+											
+										
 											aclReply.setConversationId(Const.TASK_LINE);
-											myAgent.send(aclReply);
-											Panel.rysuj(null, Decorator.decorateViewWithTask("Przydzielam Zadania " + task, Color.GREEN,Const.MANAGER_AGENT,getBufforTask()));
+											
+											
 											
 											counterTask--;
 											if(counterTask<1){
@@ -131,15 +129,6 @@ public class ManagerAgent extends Agent {
 									}
 								} catch (NullPointerException e) {
 									System.out.println(getLocalName() + " Men Null point exception");
-								}
-							}else{
-								if(getBufforTask().isEmpty()){
-									getBufforTask().push(Task.createTask("Lista ", "Pusta"));
-									Panel.rysuj(null, Decorator.decorateViewWithTask("Koniec zadañ, Dobra Robota!", Color.GREEN,Const.MANAGER_AGENT,getBufforTask()));
-									doWait(timeWait);
-									getBufforTask().pop();
-									LineAgent.stop=true;
-									myAgent.doWait(100);
 								}
 							}
 						}
@@ -170,15 +159,6 @@ public class ManagerAgent extends Agent {
 					}
 				}
 				
-				public synchronized Stack<Task> getBufforTask() {
-					int count=0;
-					if(bufforTask==null&& count==0){
-						bufforTask= Symulator.getBufforStack();
-						count++;
-					}
-					
-					return bufforTask;
-				}
 
 				public void setBufforTask(Stack<Task> bufforTask) {
 					this.bufforTask = bufforTask;
@@ -192,12 +172,11 @@ public class ManagerAgent extends Agent {
 					taski= acl.getContent().split(Const.spilt);
 					System.out.println(getLocalName() + " Zepsuta linia obslugujemy ja---- " + taski[0] + " " + taski[1]);	
 					Task task=Task.createTask(taski[0], taski[1]);
-					getBufforTask().push(task);
+
 					I_SEND_MESSAGE_FOR_ALL=false;
 					ACLMessage acl2 = acl.createReply();
 					acl2.setContent(Const.I_GET_YOU_TASK);
 					myAgent.send(acl2);
-					Panel.rysuj(null, Decorator.decorateViewWithTask("Odebralem Lini zadanie", Color.RED,Const.MANAGER_AGENT,getBufforTask()));
 					doWait(timeWait-500);
 				}
 	}		

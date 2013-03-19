@@ -38,19 +38,12 @@ public class Task {
 		return Integer.valueOf(getCoffeName())+Integer.valueOf(volumen);
 	}
 	
-	@Override
-	public boolean equals(Object o){
-		if(o!=this)
-		return false;
-		Task t = (Task)o;
-		if (t.getCoffeName()!=this.getCoffeName()&&t.getVolumen()!= getVolumen())
-			return false;
-		return true;
-	}
+
+	
 	
 	@Override
 	public String toString(){
-		return getCoffeName()+Const.spilt+getVolumen();
+		return "cos";
 	}
 }
 

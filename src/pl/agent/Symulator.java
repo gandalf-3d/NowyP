@@ -131,58 +131,11 @@ public class Symulator extends Agent {
 			System.out.println(getLocalName() + " Agent M take Down");
 		}
 		
-		public Symulator() {	}
 		
-		public static Stack<Task> getBufforStack(){
-			bufforTask = new Stack<Task>();
-			Task task= Task.createTask(Const.GALA, Const.Waga_200);
-			bufforTask.push(task);
-
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.GALA, Const.Waga_150);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_500);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_150);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.GALA, Const.Waga_150);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_500);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_150);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.FAMILY, Const.Waga_300);
-			bufforTask.push(task);
-			task= Task.createTask(Const.EXCLUSIVE, Const.Waga_300);
-			bufforTask.push(task);
-
-
-			return bufforTask;
+		
+		
 			
 		}
 		
 
-}
+
