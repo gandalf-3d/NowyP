@@ -45,7 +45,7 @@ public class Const {
 		public static final String SERVICE_MANAGER="service_manager";
 		public static final String SERVICE_LINE="service_line";
 //Conwersacion Id
-		public static final String ID_LINE_FREE="Id line jest wolna";
+		public static final String ID_LINE_FREE="Id line is free";
 		public static Map<String, Long> coffeMap;
 		
 		
