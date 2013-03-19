@@ -4,8 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Jade"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JodaTime"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Prusiński/HibernateWocspace/JadeProject/jade.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Prusiński/HibernateWocspace/JadeProject/JadeProject.zip"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Prusiński/HibernateWocspace/JadeProject/joda-time-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Mateusz/workspace/NowyP/joda-time-2.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Mateusz/workspace/NowyP/jade.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
