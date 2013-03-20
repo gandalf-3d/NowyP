@@ -1,8 +1,11 @@
 package pl.agent.read.file;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.border.EmptyBorder;
 
@@ -12,25 +15,23 @@ public class ReadFile {
 	public static StringBuffer text;
 	
 	public static StringBuffer readFile(String filePath) throws IOException {
+		
 		text = new StringBuffer();
-		FileReader fileReader = new FileReader(filePath);
-		BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-		text = text.append(bufferedReader.readLine());
+		
+		File file = new File(filePath);
+		Scanner scanner = new Scanner(file);
+		
 		
 		 try {
-		
-			 do {
-			 System.out.println(text);
-			 text= text.append(bufferedReader.readLine());
-			 
-			 //po wszytkich zakach wyslietla nullnullnull...i znow znaki od nowej lini i znów null..
-
-			 } while (text != null);
-			 
-		 } finally { 
-			 bufferedReader.close();
+			while (scanner.hasNextLine()) {
+			        text = text.append(scanner.nextLine());
+			        
 			 }
+			 
+			 scanner.close();
+		} catch (Exception e) {
+			System.err.println("B£¹d w odczytaniu pliku");
+		}
 		 
 		 return text;
 			  }
@@ -39,9 +40,10 @@ public class ReadFile {
 	
 	public static void main(String[] args) throws IOException {
 		
-		//zapetla sie trzeba poprawiæ
 		
 		readFile("c:/plik.txt");
+		
+		System.out.println(text);
 
 	}
 
