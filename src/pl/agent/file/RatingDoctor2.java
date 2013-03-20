@@ -1,0 +1,80 @@
+package pl.agent.file;
+
+import java.io.IOException;
+
+//zlicza ile slow jest w pliku i ocenia
+
+public class RatingDoctor2 {
+	
+	static String rat;
+	static Rating oceny = new Rating();
+	static ReadFile readFile = new ReadFile();
+	static StringBuffer s;
+	
+	
+	public static int countWords(StringBuffer s){
+
+		s = readFile.text;
+	    int counter = 0;
+
+	    boolean word = false;
+	    int endOfLine = s.length() - 1;
+
+	    for (int i = 0; i < s.length(); i++) {
+	        if (Character.isLetter(s.charAt(i)) == true && i != endOfLine) {
+	            word = true;
+	
+	        } else if (Character.isLetter(s.charAt(i)) == false && word == true) {
+	            counter++;
+	            word = false;
+
+	        } else if (Character.isLetter(s.charAt(i)) && i == endOfLine) {
+	            counter++;
+	        }
+	    }
+	    
+	    return counter;
+	}
+
+	public static String rating(String rat){
+		
+		int numberOfWords = countWords(s);
+		
+		//trzeba bêdzie zliczaæ slowa i jakas sredia wyznaczyc
+		
+		if(numberOfWords <= 5){
+			rat = oceny.dobra;
+		}
+		
+		else if (numberOfWords <= 4){
+			rat = oceny.przeciêtna;
+		}
+		
+		else if (numberOfWords <= 2){
+			rat = oceny.slaba;
+		}
+		
+		
+		else if (numberOfWords==0){
+			rat = oceny.beznadziejna;
+		}
+		
+		else{
+			rat = oceny.bardzoDobra;
+		}
+		
+		return rat;
+	}
+
+
+	public static void main(String[] args) throws IOException {
+		readFile.readFile("c:/plik.txt");
+		
+		System.out.println(countWords(s));
+		
+		System.out.println(rating(rat));
+		
+
+	}
+
+}
