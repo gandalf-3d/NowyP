@@ -12,9 +12,9 @@ public class RatingDoctor1 {
 	static int searchedWords = word.resulds;
 	static List<String> bankWord = word.words();
 	static Rating oceny = new Rating();
-	static String rat;
+	static int rat;
 	
-	public static String rating(String rat){
+	public static int rating(int rat){
 		
 		int bankWordSize = bankWord.size();
 		int wordSearchedSize = word.searchWord(searchedWords);
@@ -23,30 +23,30 @@ public class RatingDoctor1 {
 		//trzeba bêdzie zliczaæ slowa i jakas sredia wyznaczyc
 		
 		if (bankWordSize <= wordSearchedSize){
-			rat = oceny.bardzoDobra;
+			rat = oceny.dziesiec;
 		}
 		
 		int bankWordSize2 = bankWordSize-1; 
 		
 		if ((wordSearchedSize < bankWordSize)&&(wordSearchedSize == bankWordSize2)){
-			rat = oceny.dobra;
+			rat = oceny.piec;
 		}
 		
 		int bankWordSize3 = bankWordSize-3;
 		
 		if ((wordSearchedSize < bankWordSize)&&(wordSearchedSize == bankWordSize3)){
-			rat = oceny.przeciêtna;
+			rat = oceny.cztery;
 		}
 		
 		int bankWordSize4 = bankWordSize-4;
 		
 		if ((wordSearchedSize < bankWordSize)&&(wordSearchedSize == bankWordSize4)){
-			rat = oceny.slaba;
+			rat = oceny.trzy;
 		}
 		
 		
 		if (wordSearchedSize==0){
-			rat = oceny.beznadziejna;
+			rat = oceny.jeden;
 		}
 		
 		

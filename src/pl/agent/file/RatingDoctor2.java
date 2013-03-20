@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class RatingDoctor2 {
 	
-	static String rat;
+	static int rat;
 	static Rating oceny = new Rating();
 	static ReadFile readFile = new ReadFile();
 	static StringBuffer s;
@@ -36,31 +36,31 @@ public class RatingDoctor2 {
 	    return counter;
 	}
 
-	public static String rating(String rat){
+	public static int rating(int rat){
 		
 		int numberOfWords = countWords(s);
 		
 		//trzeba bêdzie zliczaæ slowa i jakas sredia wyznaczyc
 		
 		if(numberOfWords <= 5){
-			rat = oceny.dobra;
+			rat = oceny.trzy;
 		}
 		
 		else if (numberOfWords <= 4){
-			rat = oceny.przeciêtna;
+			rat = oceny.piec;
 		}
 		
 		else if (numberOfWords <= 2){
-			rat = oceny.slaba;
+			rat = oceny.cztery;
 		}
 		
 		
 		else if (numberOfWords==0){
-			rat = oceny.beznadziejna;
+			rat = oceny.jeden;
 		}
 		
 		else{
-			rat = oceny.bardzoDobra;
+			rat = oceny.dziesiec;
 		}
 		
 		return rat;
