@@ -6,5 +6,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JodaTime"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mateusz/workspace/NowyP/joda-time-2.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Mateusz/workspace/NowyP/jade.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Mateusz/workspace/NowyP/commons-lang3-3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
