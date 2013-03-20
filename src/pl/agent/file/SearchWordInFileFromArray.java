@@ -20,6 +20,8 @@ public class SearchWordInFileFromArray {
 		tokens.add("ma");
 		tokens.add("kota");
 		tokens.add("nie");
+		tokens.add("cos");
+		tokens.add("tam");
 		
 		return tokens;
 	}
@@ -36,8 +38,11 @@ public class SearchWordInFileFromArray {
 		while (mat.find()) {
 			
 			//wyswietla znalezione slowo
-		   System.out.println(mat.group(1));
-		   //zlicza ile slow znaleziono
+		   
+			//System.out.println(mat.group(1));
+		   
+			
+			//zlicza ile slow znaleziono
 		   resulds++;
 		}
 		return resulds;
