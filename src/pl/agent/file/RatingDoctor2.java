@@ -43,15 +43,15 @@ public class RatingDoctor2 {
 		//trzeba bêdzie zliczaæ slowa i jakas sredia wyznaczyc
 		
 		if(numberOfWords <= 5){
-			rat = oceny.trzy;
+			rat = oceny.cztery;
 		}
 		
 		else if (numberOfWords <= 4){
-			rat = oceny.dwa;
+			rat = oceny.trzy;
 		}
 		
 		else if (numberOfWords <= 2){
-			rat = oceny.jeden;
+			rat = oceny.dwa;
 		}
 		
 		
