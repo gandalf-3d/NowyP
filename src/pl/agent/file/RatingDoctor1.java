@@ -9,16 +9,18 @@ public class RatingDoctor1 {
 
 	static ReadFile readFile = new ReadFile();
 	static SearchWordInFileFromArray word = new SearchWordInFileFromArray();
+	static WordBank wordBank = new WordBank();
 	static int searchedWords = word.resulds;
-	static List<String> bankWord = word.words();
+	static List<String> bankWord = wordBank.bank();
 	static Rating oceny = new Rating();
 	static int rat;
 	
 	public static int rating(int rat){
 		
 		int bankWordSize = bankWord.size();
+		System.out.println(bankWordSize);
 		int wordSearchedSize = word.searchWord(searchedWords);
-		
+		System.out.println(wordSearchedSize);
 		
 		//trzeba bêdzie zliczaæ slowa i jakas sredia wyznaczyc
 		
@@ -29,7 +31,7 @@ public class RatingDoctor1 {
 		int bankWordSize2 = bankWordSize-1; 
 		
 		if ((wordSearchedSize < bankWordSize)&&(wordSearchedSize == bankWordSize2)){
-			rat = oceny.piec;
+			rat = oceny.siedem;
 		}
 		
 		int bankWordSize3 = bankWordSize-3;

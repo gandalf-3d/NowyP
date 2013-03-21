@@ -13,23 +13,11 @@ public class SearchWordInFileFromArray {
 	
 	static ReadFile readFile = new ReadFile();
 	static int resulds;
-	
-	public static List<String> words(){
-		List<String> tokens = new ArrayList<String>();
-		
-		tokens.add("ma");
-		tokens.add("kota");
-		tokens.add("nie");
-		tokens.add("cos");
-		tokens.add("tam");
-		
-		return tokens;
-	}
-	
+	static WordBank words = new WordBank();
 	
 	public static int searchWord(int resulds){
 		
-		String patternString = "\\b(" + StringUtils.join(words(), "|") + ")\\b";
+		String patternString = "\\b(" + StringUtils.join(words.bank(), "|") + ")\\b";
 		Pattern pat = Pattern.compile(patternString);
         Matcher mat = pat.matcher(readFile.text);
 		
