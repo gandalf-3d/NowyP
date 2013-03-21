@@ -47,11 +47,11 @@ public class RatingDoctor2 {
 		}
 		
 		else if (numberOfWords <= 4){
-			rat = oceny.piec;
+			rat = oceny.dwa;
 		}
 		
 		else if (numberOfWords <= 2){
-			rat = oceny.cztery;
+			rat = oceny.jeden;
 		}
 		
 		
